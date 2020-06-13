@@ -24,7 +24,7 @@ def partition(data, head, tail, drawData, timeTick):
     time.sleep(timeTick)
 
     data[border], data[tail] = data[tail], data[border]
-    
+
     return border
 
 def quickSort(data, head, tail, drawData, timeTick):
@@ -32,10 +32,10 @@ def quickSort(data, head, tail, drawData, timeTick):
         partitionIdx = partition(data, head, tail, drawData, timeTick)
 
         #LEFT PARTITION
-        quick_sort(data, head, partitionIdx-1, drawData, timeTick)
+        quickSort(data, head, partitionIdx-1, drawData, timeTick)
 
         #RIGHT PARTITION
-        quick_sort(data, partitionIdx+1, tail, drawData, timeTick)
+        quickSort(data, partitionIdx+1, tail, drawData, timeTick)
 
 
 def getColorArray(dataLen, head, tail, border, currIdx, isSwaping = False):
