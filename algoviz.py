@@ -23,7 +23,7 @@ canvas.grid(row=1,column=0,padx=10,pady=5)
 # User interface area
 # Row[0]
 Label(UI_Frame, text="Algoritm: ", bg='grey').grid(row=0,column=0,padx=5, pady=5,sticky = W)
-algMenu = ttk.Combobox(UI_Frame, textvariable=selected_alg, values=['Bubble Sort', 'Merge Sort', 'Quick Sort'])
+algMenu = ttk.Combobox(UI_Frame, textvariable=selected_alg, values=["Bubble Sort", "Quick Sort", "Merge Sort"])
 algMenu.grid(row=0, column=1, padx=5, pady=5)
 algMenu.current(0)
 
@@ -89,11 +89,11 @@ class App:
         spacing = 10
         normalizedData = [ i / (max(data)) for i in data]
         for i, height in enumerate(normalizedData):
-            # Top left
+            # Top left coordinates
             x0 = i * x_width + offset + spacing
             y0 = c_height - height *340
 
-            # Bottom right
+            # Bottom right coordinates
             x1 = (i+1) * x_width + offset
             y1 = c_height
 
@@ -118,17 +118,35 @@ class App:
     def startAlgorithm(self):
         """Starts the selected algorithm's simulation."""
 
+        frame = Frame(UI_Frame, bg='grey')
+        frame.grid(row=2, columnspan=4, padx=10,pady=5)
+
         if not self.data: return
 
         if algMenu.get() == 'Quick Sort':
+            Label(frame, text="Border", bg='red', fg='white').grid(row=0,column=0,padx=5, pady=5)
+            Label(frame, text="Pointer", bg='yellow').grid(row=0,column=1,padx=5, pady=5)
+            Label(frame, text="Pivot", bg='blue', fg='white').grid(row=0,column=2,padx=5, pady=5)
+            Label(frame, text="Disabled", bg='white').grid(row=0,column=3,padx=5, pady=5)
+            Label(frame, text="Sorted", bg='green', fg='white').grid(row=0,column=4,padx=5, pady=5)
+
             qs = QSort(self.data)
             qs.quickSort(0, len(self.data)-1, self.drawData, speedScale.get())
 
         elif algMenu.get() == 'Bubble Sort':
+            Label(frame, text="Unsorted", bg='yellow').grid(row=2,column=0,padx=5, pady=5)
+            Label(frame, text="Current", bg='blue', fg='white').grid(row=2,column=1,padx=5, pady=5)
+            Label(frame, text="Sorted", bg='green', fg='white').grid(row=2,column=2,padx=5, pady=5)
+
             bs = BSort(self.data)
             bs.bubbleSort(self.drawData, speedScale.get())
 
         elif algMenu.get() == 'Merge Sort':
+            Label(frame, text="Left Part", bg='yellow').grid(row=0,column=0,padx=5, pady=5)
+            Label(frame, text="Right Part", bg='blue', fg='white').grid(row=0,column=1,padx=5, pady=5)
+            Label(frame, text="Unvisited", bg='white').grid(row=0,column=2,padx=5, pady=5)
+            Label(frame, text="Sorted", bg='green', fg='white').grid(row=0,column=3,padx=5, pady=5)
+
             ms = MSort(self.data)
             ms.mergeSort(0, len(self.data)-1, self.drawData, speedScale.get())
 
