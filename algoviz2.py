@@ -40,6 +40,7 @@ minEntry.grid(row=1, column=1,padx=5,pady=5)
 maxEntry = Scale(UI_Frame, from_=10, to = 100, resolution = 1, orient=HORIZONTAL, label="Max Value")
 maxEntry.grid(row=1, column=2,padx=5,pady=5)
 
+
 class App:
     """
     The primary class of the algoviz module.
@@ -101,7 +102,6 @@ class App:
         self.data = data
         root.update_idletasks()
 
-
     def generate(self):
         """Generates a list of random integers."""
 
@@ -117,7 +117,7 @@ class App:
 
     def startAlgorithm(self):
         """Starts the selected algorithm's simulation."""
-        
+
         if not self.data: return
 
         if algMenu.get() == 'Quick Sort':
